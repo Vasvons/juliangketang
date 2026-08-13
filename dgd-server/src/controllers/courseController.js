@@ -4,7 +4,7 @@ const response = require('../utils/response');
 exports.getCourses = async (req, res, next) => {
   try {
     const [courses] = await pool.query(
-      `SELECT c.id, c.title, c.cover, c.publish_date, cat.name AS category_name
+      `SELECT c.id, c.title, c.cover, DATE_FORMAT(c.publish_date, '%Y-%c-%e') AS publish_date, cat.name AS category_name
        FROM courses c
        LEFT JOIN categories cat ON c.category_id = cat.id
        WHERE c.status = ?
@@ -21,7 +21,7 @@ exports.getCourseById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [courses] = await pool.query(
-      `SELECT c.id, c.title, c.cover, c.description, c.catalog, c.publish_date,
+      `SELECT c.id, c.title, c.cover, c.description, c.catalog, DATE_FORMAT(c.publish_date, '%Y-%c-%e') AS publish_date,
               c.category_id, cat.name AS category_name, c.level_required, l.name AS level_name
        FROM courses c
        LEFT JOIN categories cat ON c.category_id = cat.id

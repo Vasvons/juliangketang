@@ -89,6 +89,30 @@ exports.getUsers = async (req, res, next) => {
   }
 };
 
+exports.updateUserLevel = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { level_id } = req.body;
+    if (!level_id) {
+      return res.status(400).json(response.error(400, '等级不能为空'));
+    }
+    const [levels] = await pool.query('SELECT id FROM levels WHERE id = ?', [level_id]);
+    if (levels.length === 0) {
+      return res.status(400).json(response.error(400, '等级不存在'));
+    }
+    const [result] = await pool.query('UPDATE users SET level_id = ? WHERE id = ?', [
+      level_id,
+      id,
+    ]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json(response.error(404, '用户不存在'));
+    }
+    res.json(response.success({ id: Number(id), level_id }));
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.getCodes = async (req, res, next) => {
   try {
     const [codes] = await pool.query(

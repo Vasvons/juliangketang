@@ -8,6 +8,7 @@ Page({
     course: {},
     chapters: [],
     pageConfigs: {},
+    userLevel: 1,
     showLoginModal: false,
     showResourceModal: false,
     resourceText: '',
@@ -23,6 +24,7 @@ Page({
     this.setData({ courseId: id });
     this.loadCourseDetail(id);
     this.loadPageConfigs();
+    this.loadUserLevel();
     this.initRewardedVideoAd();
   },
 
@@ -77,6 +79,22 @@ Page({
       .catch(() => {});
   },
 
+  loadUserLevel() {
+    const cachedUser = storage.get('USER_INFO', {});
+    if (cachedUser && cachedUser.level_id) {
+      this.setData({ userLevel: cachedUser.level_id });
+    }
+    if (storage.get('TOKEN')) {
+      api.getUserInfo()
+        .then((res) => {
+          const data = res.data || res;
+          storage.set('USER_INFO', data);
+          this.setData({ userLevel: (data && data.level_id) || 1 });
+        })
+        .catch(() => {});
+    }
+  },
+
   initRewardedVideoAd() {
     if (wx.createRewardedVideoAd) {
       try {
@@ -120,6 +138,11 @@ Page({
     const token = storage.get('TOKEN');
     if (!token) {
       this.setData({ showLoginModal: true });
+      return;
+    }
+    // 卡密用户（等级>1）直接获取资源，免广告
+    if (this.data.userLevel > 1) {
+      this.fetchResource();
       return;
     }
     wx.showModal({

@@ -56,6 +56,12 @@ const routes = [
         meta: { title: '等级管理', icon: 'Medal' }
       },
       {
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/UserView.vue'),
+        meta: { title: '用户管理', icon: 'User' }
+      },
+      {
         path: 'activation-code',
         name: 'ActivationCode',
         component: () => import('@/views/ActivationCodeView.vue'),

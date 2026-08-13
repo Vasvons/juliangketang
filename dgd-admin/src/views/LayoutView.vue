@@ -75,6 +75,7 @@ const menuList = [
   { path: 'category', title: '分类管理', icon: 'FolderOpened' },
   { path: 'course', title: '课程管理', icon: 'Reading' },
   { path: 'level', title: '等级管理', icon: 'Medal' },
+  { path: 'user', title: '用户管理', icon: 'User' },
   { path: 'activation-code', title: '卡密管理', icon: 'Key' },
   { path: 'config', title: '页面配置', icon: 'SetUp' }
 ]

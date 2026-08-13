@@ -1,0 +1,1 @@
+import{a as t}from"./request-Br4VBOPE.js";import{a as e}from"./js.cookie-BnshStg2.js";const r="dgd_admin_token",n="/api/admin",m=o=>{const a=new FormData;return a.append("file",o),t.post(`${n}/upload`,a,{headers:{"Content-Type":"multipart/form-data",Authorization:`Bearer ${e.get(r)||""}`}})};export{m as u};

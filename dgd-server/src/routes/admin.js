@@ -17,6 +17,7 @@ router.post('/auth/login', adminController.login);
 // 仪表盘与用户
 router.get('/dashboard', authenticateAdmin, adminController.getDashboard);
 router.get('/users', authenticateAdmin, adminController.getUsers);
+router.put('/users/:id/level', authenticateAdmin, adminController.updateUserLevel);
 
 // Banner 管理
 router.get('/banners', authenticateAdmin, bannerController.getBanners);

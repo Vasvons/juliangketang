@@ -67,7 +67,7 @@ exports.getCourseResource = async (req, res, next) => {
     const userId = req.user.user_id;
 
     const [courses] = await pool.query(
-      'SELECT id, title, level_required, netdisk_resource FROM courses WHERE id = ? AND status = ?',
+      'SELECT id, title, netdisk_resource FROM courses WHERE id = ? AND status = ?',
       [id, 'published']
     );
     if (courses.length === 0) {
@@ -78,14 +78,6 @@ exports.getCourseResource = async (req, res, next) => {
     const [users] = await pool.query('SELECT level_id FROM users WHERE id = ?', [userId]);
     if (users.length === 0) {
       return res.status(404).json(response.error(404, '用户不存在'));
-    }
-    const userLevelId = users[0].level_id || 1;
-    const requiredLevelId = course.level_required || 1;
-
-    if (userLevelId < requiredLevelId) {
-      return res
-        .status(403)
-        .json(response.error(403, '当前等级无法获取该资源，请先激活卡密'));
     }
 
     const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);

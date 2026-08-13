@@ -2,7 +2,7 @@
   <div class="login-page">
     <el-card class="login-card" shadow="hover">
       <template #header>
-        <h2 class="login-title">DGD 管理后台</h2>
+        <h2 class="login-title">JLXT 管理后台</h2>
       </template>
       <el-form :model="form" label-position="top" @submit.prevent="handleLogin">
         <el-form-item label="用户名">

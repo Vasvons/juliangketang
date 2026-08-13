@@ -2,7 +2,7 @@
 const storage = require('./storage');
 
 // 默认 baseURL，后续可从 storage 或环境读取
-const DEFAULT_BASE_URL = 'https://jlkt.jlyl.net.cn/api';
+const DEFAULT_BASE_URL = 'https://jlxt.jlyl.net.cn/api';
 
 // 请求拦截器
 const requestInterceptors = [];

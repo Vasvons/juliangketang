@@ -21,6 +21,9 @@ Thumbs.db
 
 # Build output
 dist/
+# 例外：管理后台构建产物需提交，供服务器部署
+!dgd-admin/dist/
+!dgd-admin/dist/**
 
 # Uploads (keep directory structure, ignore content)
 dgd-server/uploads/*

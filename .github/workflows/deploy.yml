@@ -16,8 +16,17 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /www/juliangketang/dgd-server
+            cd /www/juliangketang
             git pull origin main
+
+            # 部署后端
+            cd /www/juliangketang/dgd-server
             npm install --production
             pm2 restart juliang-server
+
+            # 同步管理后台静态文件到 Nginx 目录
+            mkdir -p /var/www/admin
+            cp -rf /www/juliangketang/dgd-admin/dist/* /var/www/admin/
+            nginx -t && nginx -s reload
+
             echo "Deploy completed at $(date)"

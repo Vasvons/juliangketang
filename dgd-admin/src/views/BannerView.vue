@@ -17,7 +17,6 @@
           />
         </template>
       </el-table-column>
-      <el-table-column prop="link" label="链接" show-overflow-tooltip />
       <el-table-column prop="sort_order" label="排序" width="80" />
       <el-table-column label="状态" width="100">
         <template #default="{ row }">
@@ -63,9 +62,6 @@
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
         </el-form-item>
-        <el-form-item label="链接">
-          <el-input v-model="form.link" placeholder="请输入跳转链接" />
-        </el-form-item>
         <el-form-item label="排序">
           <el-input-number v-model="form.sort_order" :min="0" />
         </el-form-item>
@@ -105,14 +101,12 @@ const currentId = ref(null)
 
 const form = reactive({
   image: '',
-  link: '',
   sort_order: 0,
   status: 'active'
 })
 
 const resetForm = () => {
   form.image = ''
-  form.link = ''
   form.sort_order = 0
   form.status = 'active'
 }
@@ -140,7 +134,6 @@ const handleEdit = (row) => {
   isEdit.value = true
   currentId.value = row.id
   form.image = row.image
-  form.link = row.link || ''
   form.sort_order = row.sort_order
   form.status = row.status
   dialogVisible.value = true

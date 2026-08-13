@@ -1,0 +1,1 @@
+import{r as e}from"./request-DmtdbwQK.js";const s=t=>e.get("/categories",{params:t}),o=t=>e.post("/categories",t),g=(t,r)=>e.put(`/categories/${t}`,r),u=t=>e.delete(`/categories/${t}`),c=(t,r)=>e.put(`/categories/${t}/status`,r);export{g as a,o as c,u as d,s as g,c as u};

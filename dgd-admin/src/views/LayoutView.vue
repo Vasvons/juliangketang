@@ -2,11 +2,11 @@
   <el-container class="layout-container">
     <el-aside :width="appStore.sidebarCollapsed ? '64px' : '220px'" class="sidebar">
       <div class="logo">
-        <span v-if="!appStore.sidebarCollapsed">DGD Admin</span>
+        <span v-if="!appStore.sidebarCollapsed">JLXT Admin</span>
         <el-icon v-else><Management /></el-icon>
       </div>
       <el-menu
-        :default-active="route.path"
+        :default-active="currentPath"
         :collapse="appStore.sidebarCollapsed"
         :collapse-transition="false"
         router
@@ -57,16 +57,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, ref } from 'vue'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 
-const route = useRoute()
-const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
+
+// 直接从 window.location 读取路径，避免 useRoute() 在生产构建中返回 undefined
+const currentPath = ref(window.location.pathname)
 
 const menuList = [
   { path: 'home', title: '后台首页', icon: 'HomeFilled' },
@@ -80,7 +80,7 @@ const menuList = [
 ]
 
 const pageTitle = computed(() => {
-  const matched = menuList.find((item) => route.path === `/dashboard/${item.path}`)
+  const matched = menuList.find((item) => currentPath.value === `/dashboard/${item.path}`)
   return matched?.title || '管理后台'
 })
 

@@ -88,7 +88,8 @@ const handleCommand = (command) => {
   if (command === 'logout') {
     userStore.logout()
     ElMessage.success('已退出登录')
-    router.push('/login')
+    // 使用 window.location 跳转，避免 router 实例在某些情况下为 undefined
+    window.location.href = (import.meta.env.BASE_URL || '/') + 'login'
   }
 }
 </script>

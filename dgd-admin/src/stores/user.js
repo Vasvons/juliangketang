@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import Cookies from 'js-cookie'
-import pinia from './index'
 
 const TOKEN_KEY = 'dgd_admin_token'
 
-const useUserStoreInner = defineStore('user', () => {
+export const useUserStore = defineStore('user', () => {
   const token = ref(Cookies.get(TOKEN_KEY) || '')
   const userInfo = ref(null)
 
@@ -35,6 +34,3 @@ const useUserStoreInner = defineStore('user', () => {
     logout
   }
 })
-
-// 绑定 pinia 实例的导出函数，解决生产构建中 getActivePinia() 时序问题
-export const useUserStore = () => useUserStoreInner(pinia)

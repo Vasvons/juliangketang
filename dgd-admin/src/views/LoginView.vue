@@ -55,7 +55,8 @@ const handleLogin = async () => {
     userStore.setToken(res.data.token)
     userStore.setUserInfo(res.data.admin)
     ElMessage.success('登录成功')
-    router.push('/dashboard')
+    // 使用 window.location 跳转，避免 router 实例在某些情况下为 undefined
+    window.location.href = (import.meta.env.BASE_URL || '/') + 'dashboard'
   } catch (error) {
     console.error(error)
   } finally {

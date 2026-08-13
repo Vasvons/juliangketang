@@ -7,12 +7,14 @@ Page({
 
   onLoad(options) {
     const { title, url } = options || {};
+    const decodedTitle = title ? decodeURIComponent(title) : '二维码';
+    const decodedUrl = url ? decodeURIComponent(url) : '';
     this.setData({
-      title: title || '二维码',
-      url: url || ''
+      title: decodedTitle,
+      url: decodedUrl
     });
-    if (title) {
-      wx.setNavigationBarTitle({ title });
+    if (decodedTitle) {
+      wx.setNavigationBarTitle({ title: decodedTitle });
     }
   },
 

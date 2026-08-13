@@ -27,37 +27,30 @@
   margin-bottom: 32rpx;
 }
 
-.resource-item {
-  display: flex;
-  align-items: center;
+.resource-content {
+  font-size: 28rpx;
+  color: #333;
+  background: #f5f5f5;
+  padding: 24rpx;
+  border-radius: 8rpx;
+  word-break: break-all;
+  white-space: pre-wrap;
+  line-height: 1.6;
   margin-bottom: 24rpx;
 }
 
-.resource-label {
-  width: 100rpx;
-  font-size: 28rpx;
-  color: #666;
-  flex-shrink: 0;
-}
-
-.resource-value {
-  flex: 1;
-  font-size: 26rpx;
-  color: #333;
-  background: #f5f5f5;
-  padding: 16rpx;
-  border-radius: 8rpx;
-  word-break: break-all;
-  margin-right: 16rpx;
+.resource-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24rpx;
 }
 
 .copy-btn {
-  padding: 12rpx 24rpx;
+  padding: 16rpx 48rpx;
   background: #1890ff;
   color: #fff;
-  font-size: 26rpx;
+  font-size: 28rpx;
   border-radius: 8rpx;
-  flex-shrink: 0;
 }
 
 .resource-cancel {

@@ -112,19 +112,12 @@
             placeholder="每行一个章节"
           />
         </el-form-item>
-        <el-form-item label="网盘链接">
-          <el-input v-model="form.netdisk_link" placeholder="请输入百度网盘链接" />
-        </el-form-item>
-        <el-form-item label="提取码">
-          <el-input v-model="form.netdisk_code" placeholder="请输入提取码" style="width: 200px" />
-        </el-form-item>
-        <el-form-item label="发布日期">
-          <el-date-picker
-            v-model="form.publish_date"
-            type="date"
-            placeholder="选择发布日期"
-            value-format="YYYY-MM-DD"
-            style="width: 100%"
+        <el-form-item label="网盘资源">
+          <el-input
+            v-model="form.netdisk_resource"
+            type="textarea"
+            :rows="6"
+            placeholder="请输入完整的网盘资源文本，例如：&#10;链接：https://pan.baidu.com/s/xxxxx?pwd=6pg1&#10;提取码：6pg1&#10;复制这段内容后打开百度网盘手机App，操作更方便哦"
           />
         </el-form-item>
         <el-form-item label="所需等级">
@@ -186,9 +179,7 @@ const form = reactive({
   category_id: '',
   description: '',
   catalog: '',
-  netdisk_link: '',
-  netdisk_code: '',
-  publish_date: '',
+  netdisk_resource: '',
   level_required: '',
   sort_order: 0,
   status: 'published'
@@ -200,9 +191,7 @@ const resetForm = () => {
   form.category_id = ''
   form.description = ''
   form.catalog = ''
-  form.netdisk_link = ''
-  form.netdisk_code = ''
-  form.publish_date = ''
+  form.netdisk_resource = ''
   form.level_required = ''
   form.sort_order = 0
   form.status = 'published'
@@ -266,9 +255,7 @@ const handleEdit = (row) => {
   form.category_id = row.category_id || ''
   form.description = row.description || ''
   form.catalog = row.catalog || ''
-  form.netdisk_link = row.netdisk_link || ''
-  form.netdisk_code = row.netdisk_code || ''
-  form.publish_date = row.publish_date || ''
+  form.netdisk_resource = row.netdisk_resource || ''
   form.level_required = row.level_required || ''
   form.sort_order = row.sort_order
   form.status = row.status

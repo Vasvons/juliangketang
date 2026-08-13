@@ -5,11 +5,7 @@ Component({
       type: Boolean,
       value: false
     },
-    link: {
-      type: String,
-      value: ''
-    },
-    code: {
+    resource: {
       type: String,
       value: ''
     }

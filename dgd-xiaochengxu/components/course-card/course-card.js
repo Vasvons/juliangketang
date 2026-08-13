@@ -22,10 +22,7 @@ Component({
       if (!date) return '';
       const d = new Date(date);
       if (isNaN(d.getTime())) return date;
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
     },
     onTap() {
       const { course } = this.data;

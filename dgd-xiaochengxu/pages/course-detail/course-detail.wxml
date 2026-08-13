@@ -50,4 +50,4 @@
 </view>
 
 <login-modal visible="{{showLoginModal}}" bindclose="onLoginClose" bindsuccess="onLoginSuccess"></login-modal>
-<resource-modal visible="{{showResourceModal}}" link="{{resourceLink}}" code="{{resourceCode}}" bindclose="onResourceClose"></resource-modal>
+<resource-modal visible="{{showResourceModal}}" resource="{{resourceText}}" bindclose="onResourceClose"></resource-modal>

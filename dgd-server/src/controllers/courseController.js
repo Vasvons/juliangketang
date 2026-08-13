@@ -67,7 +67,7 @@ exports.getCourseResource = async (req, res, next) => {
     const userId = req.user.user_id;
 
     const [courses] = await pool.query(
-      'SELECT id, title, level_required, netdisk_link, netdisk_code FROM courses WHERE id = ? AND status = ?',
+      'SELECT id, title, level_required, netdisk_resource FROM courses WHERE id = ? AND status = ?',
       [id, 'published']
     );
     if (courses.length === 0) {
@@ -106,8 +106,7 @@ exports.getCourseResource = async (req, res, next) => {
 
     res.json(
       response.success({
-        netdisk_link: course.netdisk_link,
-        netdisk_code: course.netdisk_code,
+        netdisk_resource: course.netdisk_resource || '',
       })
     );
   } catch (err) {

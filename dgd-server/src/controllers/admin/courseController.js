@@ -29,9 +29,7 @@ exports.createCourse = async (req, res, next) => {
       category_id,
       description,
       catalog,
-      netdisk_link,
-      netdisk_code,
-      publish_date,
+      netdisk_resource,
       status,
       level_required,
       sort_order,
@@ -41,17 +39,15 @@ exports.createCourse = async (req, res, next) => {
     }
     const [result] = await pool.query(
       `INSERT INTO courses
-       (title, cover, category_id, description, catalog, netdisk_link, netdisk_code, publish_date, status, level_required, sort_order)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       (title, cover, category_id, description, catalog, netdisk_resource, publish_date, status, level_required, sort_order)
+       VALUES (?, ?, ?, ?, ?, ?, CURDATE(), ?, ?, ?)`,
       [
         title,
         cover || '',
         category_id || null,
         description || '',
         catalog || '',
-        netdisk_link || '',
-        netdisk_code || '',
-        publish_date || null,
+        netdisk_resource || '',
         status || 'published',
         level_required || null,
         sort_order || 0,
@@ -72,9 +68,7 @@ exports.updateCourse = async (req, res, next) => {
       category_id,
       description,
       catalog,
-      netdisk_link,
-      netdisk_code,
-      publish_date,
+      netdisk_resource,
       status,
       level_required,
       sort_order,
@@ -85,7 +79,7 @@ exports.updateCourse = async (req, res, next) => {
     const [result] = await pool.query(
       `UPDATE courses SET
         title = ?, cover = ?, category_id = ?, description = ?, catalog = ?,
-        netdisk_link = ?, netdisk_code = ?, publish_date = ?, status = ?,
+        netdisk_resource = ?, status = ?,
         level_required = ?, sort_order = ?
        WHERE id = ?`,
       [
@@ -94,9 +88,7 @@ exports.updateCourse = async (req, res, next) => {
         category_id || null,
         description || '',
         catalog || '',
-        netdisk_link || '',
-        netdisk_code || '',
-        publish_date || null,
+        netdisk_resource || '',
         status || 'published',
         level_required || null,
         sort_order || 0,

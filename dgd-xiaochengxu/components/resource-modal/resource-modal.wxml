@@ -2,15 +2,9 @@
 <view class="resource-modal-mask" wx:if="{{visible}}" bindtap="onClose">
   <view class="resource-modal" catchtap="onNoop">
     <view class="resource-title">资源地址</view>
-    <view class="resource-item">
-      <view class="resource-label">链接</view>
-      <view class="resource-value">{{link}}</view>
-      <view class="copy-btn" data-text="{{link}}" bindtap="onCopy">复制</view>
-    </view>
-    <view class="resource-item">
-      <view class="resource-label">提取码</view>
-      <view class="resource-value">{{code}}</view>
-      <view class="copy-btn" data-text="{{code}}" bindtap="onCopy">复制</view>
+    <view class="resource-content">{{resource}}</view>
+    <view class="resource-actions">
+      <view class="copy-btn" data-text="{{resource}}" bindtap="onCopy">复制全部</view>
     </view>
     <view class="resource-cancel" bindtap="onClose">取消</view>
   </view>

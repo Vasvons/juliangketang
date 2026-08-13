@@ -10,8 +10,7 @@ Page({
     pageConfigs: {},
     showLoginModal: false,
     showResourceModal: false,
-    resourceLink: '',
-    resourceCode: '',
+    resourceText: '',
     rewardedVideoAd: null
   },
 
@@ -42,6 +41,7 @@ Page({
         wx.hideLoading();
         const data = res.data || res;
         const chapters = this.parseChapters(data.catalog);
+        data.publish_date = this.formatDate(data.publish_date);
         this.setData({
           course: data,
           chapters
@@ -51,6 +51,13 @@ Page({
       .catch(() => {
         wx.hideLoading();
       });
+  },
+
+  formatDate(date) {
+    if (!date) return '';
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return date;
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
   },
 
   parseChapters(catalog) {
@@ -155,8 +162,7 @@ Page({
         wx.hideLoading();
         const data = res.data || res;
         this.setData({
-          resourceLink: data.netdisk_link || '',
-          resourceCode: data.netdisk_code || '',
+          resourceText: data.netdisk_resource || '',
           showResourceModal: true
         });
       })

@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+import Cookies from 'js-cookie'
+
+const TOKEN_KEY = 'dgd_admin_token'
 
 const routes = [
   {
@@ -75,8 +77,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const userStore = useUserStore()
-  const token = userStore.token
+  // 直接从 Cookie 读取 token，避免 Pinia 在生产构建中的时序问题
+  const token = Cookies.get(TOKEN_KEY) || ''
 
   if (to.path !== '/login' && !token) {
     next('/login')

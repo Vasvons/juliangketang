@@ -8,6 +8,8 @@ const errorHandler = require('./middleware/error');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 信任反向代理（Nginx），使 req.protocol 返回 https 而非 http
+app.set('trust proxy', true);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

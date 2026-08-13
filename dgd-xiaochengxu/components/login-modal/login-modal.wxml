@@ -5,10 +5,31 @@
       <view class="login-title">授权登录</view>
     </view>
     <view class="login-body">
-      <view class="login-tip">授权登录后即可获取资源、激活卡密</view>
+      <view class="login-tip">请选择头像并填写昵称完成登录</view>
+
+      <view class="profile-row">
+        <button class="avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+          <image wx:if="{{tempAvatar}}" class="avatar-img" src="{{tempAvatar}}" mode="aspectFill"></image>
+          <view wx:else class="avatar-placeholder">
+            <text class="avatar-placeholder-text">选头像</text>
+          </view>
+        </button>
+      </view>
+
+      <view class="nickname-row">
+        <input
+          class="nickname-input"
+          type="nickname"
+          placeholder="请输入昵称"
+          value="{{tempNickname}}"
+          bindinput="onNicknameInput"
+          bindblur="onNicknameBlur"
+        />
+      </view>
+
       <view class="login-btns">
         <view class="btn-cancel" bindtap="onCancel">继续浏览</view>
-        <button class="btn-confirm" bindtap="onLogin">授权登录</button>
+        <button class="btn-confirm" bindtap="onLogin" loading="{{submitting}}">登录</button>
       </view>
     </view>
   </view>

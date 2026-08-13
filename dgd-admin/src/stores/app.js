@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import pinia from './index'
 
-export const useAppStore = defineStore('app', () => {
+const useAppStoreDef = defineStore('app', () => {
   const sidebarCollapsed = ref(false)
 
   const toggleSidebar = () => {
@@ -13,3 +14,8 @@ export const useAppStore = defineStore('app', () => {
     toggleSidebar
   }
 })
+
+export function useAppStore() {
+  return useAppStoreDef(pinia)
+}
+

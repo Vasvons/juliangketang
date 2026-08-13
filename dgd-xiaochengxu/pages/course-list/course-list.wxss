@@ -1,0 +1,20 @@
+/* pages/course-list/course-list.wxss */
+.page-container {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.course-list {
+  padding: 24rpx;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 80rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.bottom-safe {
+  height: 40rpx;
+}

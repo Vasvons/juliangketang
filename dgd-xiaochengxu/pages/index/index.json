@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "聚量学堂",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {
+    "search-bar": "/components/search-bar/search-bar",
+    "banner-swiper": "/components/banner-swiper/banner-swiper",
+    "mini-game-ad": "/components/mini-game-ad/mini-game-ad",
+    "notice-bar": "/components/notice-bar/notice-bar",
+    "menu-grid": "/components/menu-grid/menu-grid",
+    "course-card": "/components/course-card/course-card",
+    "ad-card": "/components/ad-card/ad-card",
+    "welcome-popup": "/components/welcome-popup/welcome-popup"
+  }
+}

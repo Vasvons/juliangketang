@@ -1,0 +1,13 @@
+<!--components/search-bar/search-bar.wxml-->
+<view class="search-bar" bindtap="onTap">
+  <view class="search-input-box">
+    <text class="search-icon">🔍</text>
+    <input
+      class="search-input"
+      placeholder="{{placeholder}}"
+      value="{{keyword}}"
+      disabled
+      bindinput="onInput"
+    />
+  </view>
+</view>

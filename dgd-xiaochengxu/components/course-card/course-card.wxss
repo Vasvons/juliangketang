@@ -1,0 +1,65 @@
+/* components/course-card/course-card.wxss */
+.course-card {
+  display: flex;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.course-cover {
+  width: 200rpx;
+  height: 150rpx;
+  border-radius: 12rpx;
+  margin-right: 24rpx;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.course-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.course-title {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-tags {
+  margin-top: 12rpx;
+}
+
+.tag-free,
+.tag-vip {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+}
+
+.tag-free {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.tag-vip {
+  background: #fff7e6;
+  color: #ff6600;
+}
+
+.course-date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
+}

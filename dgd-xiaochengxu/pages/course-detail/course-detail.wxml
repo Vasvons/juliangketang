@@ -1,0 +1,53 @@
+<!--pages/course-detail/course-detail.wxml-->
+<view class="page-container">
+  <view class="course-header">
+    <view class="course-title">{{course.title}}</view>
+    <view class="course-meta">
+      <text class="course-date">{{course.publish_date}}</text>
+      <text class="course-category">{{course.category_name}}</text>
+    </view>
+  </view>
+
+  <mini-game-ad></mini-game-ad>
+
+  <image class="course-cover" src="{{course.cover || '/images/placeholder.png'}}" mode="widthFix"></image>
+
+  <view class="section-block">
+    <view class="section-title">项目介绍</view>
+    <rich-text class="rich-content" nodes="{{course.description}}"></rich-text>
+  </view>
+
+  <view class="section-block">
+    <view class="section-title">课程目录</view>
+    <view class="chapter-list">
+      <view class="chapter-item" wx:for="{{chapters}}" wx:key="index">
+        <text class="chapter-index">{{index + 1}}.</text>
+        <text class="chapter-name">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="disclaimer">本站资源均源自网络，如果有问题请联系客服，我们将在72小时内删除</view>
+  <view class="bottom-placeholder"></view>
+</view>
+
+<view class="action-bar">
+  <view class="action-left">
+    <view class="action-item" bindtap="onHome">
+      <image class="action-icon" src="/images/action-icon-home.png" mode="aspectFit"></image>
+      <text class="action-text">首页</text>
+    </view>
+    <view class="action-item" bindtap="onService">
+      <image class="action-icon" src="/images/action-icon-service.png" mode="aspectFit"></image>
+      <text class="action-text">客服</text>
+    </view>
+    <view class="action-item" bindtap="onActivation">
+      <image class="action-icon action-icon-activation" src="/images/action-icon-activation.png" mode="aspectFit"></image>
+      <text class="action-text">卡密激活</text>
+    </view>
+  </view>
+  <view class="action-get" bindtap="onGetResource">获取资源</view>
+</view>
+
+<login-modal visible="{{showLoginModal}}" bindclose="onLoginClose" bindsuccess="onLoginSuccess"></login-modal>
+<resource-modal visible="{{showResourceModal}}" link="{{resourceLink}}" code="{{resourceCode}}" bindclose="onResourceClose"></resource-modal>

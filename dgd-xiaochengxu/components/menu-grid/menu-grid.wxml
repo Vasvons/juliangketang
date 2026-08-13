@@ -1,0 +1,16 @@
+<!--components/menu-grid/menu-grid.wxml-->
+<view class="menu-grid">
+  <view
+    class="menu-item"
+    wx:for="{{list}}"
+    wx:key="id"
+    data-item="{{item}}"
+    bindtap="onTap"
+  >
+    <view class="menu-icon-box">
+      <image wx:if="{{item.icon}}" class="menu-icon-img" src="{{item.icon}}" mode="aspectFit"></image>
+      <text wx:else class="menu-icon-text" style="color: {{item.color}};">{{item.name[0]}}</text>
+    </view>
+    <view class="menu-name">{{item.name}}</view>
+  </view>
+</view>

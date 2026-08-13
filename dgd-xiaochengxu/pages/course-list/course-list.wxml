@@ -1,0 +1,13 @@
+<!--pages/course-list/course-list.wxml-->
+<view class="page-container">
+  <view class="course-list">
+    <block wx:for="{{displayList}}" wx:key="index">
+      <course-card wx:if="{{item.type === 'course'}}" course="{{item.data}}"></course-card>
+      <ad-card wx:if="{{item.type === 'ad'}}" title="精选推荐" desc="发现更多精彩课程"></ad-card>
+    </block>
+  </view>
+  <view class="empty-tip" wx:if="{{courses.length === 0 && displayList.length === 0}}">
+    暂无课程
+  </view>
+  <view class="bottom-safe"></view>
+</view>

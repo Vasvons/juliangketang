@@ -1,0 +1,13 @@
+<!--components/tab-bar/tab-bar.wxml-->
+<view class="tab-bar safe-area-bottom">
+  <view
+    class="tab-item {{active === index ? 'active' : ''}}"
+    wx:for="{{list}}"
+    wx:key="index"
+    bindtap="onSwitch"
+    data-index="{{index}}"
+  >
+    <view class="tab-icon"></view>
+    <view class="tab-text">{{item.text}}</view>
+  </view>
+</view>

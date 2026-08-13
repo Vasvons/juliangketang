@@ -1,0 +1,9 @@
+<!--components/mini-game-ad/mini-game-ad.wxml-->
+<view class="mini-game-ad" bindtap="onTap">
+  <image class="game-icon" src="/images/placeholder.png" mode="aspectFill"></image>
+  <view class="game-info">
+    <view class="game-title">{{title}}</view>
+    <view class="game-desc">{{desc}}</view>
+  </view>
+  <view class="game-btn">进入小游戏</view>
+</view>

@@ -1,0 +1,26 @@
+/* components/search-bar/search-bar.wxss */
+.search-bar {
+  padding: 16rpx 24rpx;
+  background: #fff;
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+  padding: 0 24rpx;
+}
+
+.search-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+  opacity: 0.5;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #999;
+}

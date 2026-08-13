@@ -1,0 +1,12 @@
+<!--components/course-card/course-card.wxml-->
+<view class="course-card" bindtap="onTap">
+  <image class="course-cover" src="{{course.cover || '/images/placeholder.png'}}" mode="aspectFill"></image>
+  <view class="course-info">
+    <view class="course-title">{{course.title}}</view>
+    <view class="course-tags">
+      <text class="tag-free" wx:if="{{course.free}}">免费</text>
+      <text class="tag-vip" wx:else>VIP</text>
+    </view>
+    <view class="course-date">{{displayDate}}</view>
+  </view>
+</view>

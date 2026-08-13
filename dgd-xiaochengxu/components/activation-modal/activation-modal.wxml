@@ -1,0 +1,17 @@
+<!--components/activation-modal/activation-modal.wxml-->
+<view class="activation-modal-mask" wx:if="{{visible}}" bindtap="onClose">
+  <view class="activation-modal" catchtap="onNoop">
+    <view class="activation-title">卡密激活</view>
+    <input
+      class="activation-input"
+      placeholder="请输入卡密"
+      value="{{code}}"
+      bindinput="onInput"
+      confirm-type="done"
+    />
+    <view class="activation-btns">
+      <view class="btn-cancel" bindtap="onCancel">取消</view>
+      <view class="btn-confirm" bindtap="onConfirm">确定</view>
+    </view>
+  </view>
+</view>

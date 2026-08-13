@@ -1,0 +1,45 @@
+/* components/mini-game-ad/mini-game-ad.wxss */
+.mini-game-ad {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 24rpx;
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.game-icon {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
+  background: #f0f0f0;
+}
+
+.game-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.game-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.game-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.game-btn {
+  padding: 12rpx 24rpx;
+  background: #07c160;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+}

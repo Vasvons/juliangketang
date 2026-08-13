@@ -1,0 +1,35 @@
+<!--pages/index/index.wxml-->
+<view class="page-container">
+  <search-bar></search-bar>
+  <banner-swiper banners="{{banners}}"></banner-swiper>
+  <mini-game-ad></mini-game-ad>
+  <notice-bar notices="{{notices}}"></notice-bar>
+  <menu-grid categories="{{categories}}"></menu-grid>
+
+  <view class="section-header">
+    <view class="section-left">
+      <text class="section-icon">🔥</text>
+      <text class="section-title">最近更新</text>
+    </view>
+    <view class="section-more" bindtap="onMore">
+      <text>更多</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <view class="course-list">
+    <block wx:for="{{displayList}}" wx:key="index">
+      <course-card wx:if="{{item.type === 'course'}}" course="{{item.data}}"></course-card>
+      <ad-card wx:if="{{item.type === 'ad'}}" title="精选推荐" desc="发现更多精彩课程"></ad-card>
+    </block>
+  </view>
+
+  <view class="bottom-safe"></view>
+
+  <welcome-popup
+    visible="{{welcomeVisible}}"
+    title="{{welcomeTitle}}"
+    content="{{welcomeContent}}"
+    bind:close="onWelcomeClose"
+  ></welcome-popup>
+</view>

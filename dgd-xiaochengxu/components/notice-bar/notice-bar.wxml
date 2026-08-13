@@ -1,0 +1,12 @@
+<!--components/notice-bar/notice-bar.wxml-->
+<view class="notice-bar">
+  <image class="notice-icon" src="/images/icon-notice.png" mode="aspectFit"></image>
+  <view class="notice-content">
+    <view class="notice-scroll-wrapper" wx:if="{{content}}">
+      <view class="notice-scroll-track">
+        <text class="notice-text">{{content}}</text>
+        <text class="notice-text">{{content}}</text>
+      </view>
+    </view>
+  </view>
+</view>

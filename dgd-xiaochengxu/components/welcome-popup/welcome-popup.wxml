@@ -1,0 +1,13 @@
+<view class="popup-mask" wx:if="{{visible}}" bindtap="onClose">
+  <view class="popup-modal" catchtap="onNoop">
+    <view class="popup-header">
+      <view class="popup-title">{{title}}</view>
+    </view>
+    <view class="popup-body">
+      <view class="popup-content">{{content}}</view>
+    </view>
+    <view class="popup-footer">
+      <view class="popup-btn" bindtap="onClose">知道了</view>
+    </view>
+  </view>
+</view>

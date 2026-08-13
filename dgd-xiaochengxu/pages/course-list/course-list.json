@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "课程列表",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {
+    "course-card": "/components/course-card/course-card",
+    "ad-card": "/components/ad-card/ad-card"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "课程详情",
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {
+    "mini-game-ad": "/components/mini-game-ad/mini-game-ad",
+    "login-modal": "/components/login-modal/login-modal",
+    "resource-modal": "/components/resource-modal/resource-modal"
+  }
+}

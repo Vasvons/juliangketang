@@ -1,0 +1,12 @@
+<!--components/ad-card/ad-card.wxml-->
+<view class="ad-card" bindtap="onTap">
+  <image class="ad-icon" src="/images/placeholder.png" mode="aspectFill"></image>
+  <view class="ad-info">
+    <view class="ad-title-row">
+      <text class="ad-title">{{title}}</text>
+      <text class="ad-badge">广告</text>
+    </view>
+    <view class="ad-desc">{{desc}}</view>
+  </view>
+  <view class="ad-btn">进入</view>
+</view>

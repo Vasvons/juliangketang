@@ -1,0 +1,36 @@
+<!--pages/activation/activation.wxml-->
+<view class="page-container">
+  <!-- 顶部深色区域 -->
+  <view class="activation-header">
+    <image class="header-bg" src="/images/activation-header-bg-v2.png" mode="aspectFill"></image>
+    <image class="avatar" src="/images/avatar-default.png" mode="aspectFill"></image>
+    <view class="level-tag">当前等级：{{isLogin ? (userInfo.level_name || '普通用户') : '未登录'}}</view>
+  </view>
+
+  <!-- VIP 卡片 -->
+  <view class="vip-card">
+    <image class="vip-card-bg" src="/images/vip-card-bg-v2.png" mode="aspectFill"></image>
+    <view class="vip-info">
+      <view class="vip-level">{{isLogin ? (userInfo.level_name || '普通用户') : '未登录'}}</view>
+      <view class="activate-btn" bindtap="onActivateTap">卡密激活</view>
+    </view>
+  </view>
+
+  <!-- 会员介绍 -->
+  <view class="info-card">
+    <view class="section-title">1.会员介绍</view>
+    <rich-text class="rich-content" nodes="{{pageConfigs.activation_page_intro || defaultIntro}}"></rich-text>
+  </view>
+
+  <!-- 开通流程 -->
+  <view class="info-card">
+    <view class="section-title">2.开通流程</view>
+    <view class="qrcode-tip">扫下面微信直接去购买卡密就可以</view>
+    <image wx:if="{{pageConfigs.activation_page_qrcode}}" class="qrcode-image" src="{{pageConfigs.activation_page_qrcode}}" mode="widthFix"></image>
+  </view>
+
+  <view class="bottom-safe"></view>
+</view>
+
+<login-modal visible="{{showLoginModal}}" bindclose="onLoginClose" bindsuccess="onLoginSuccess"></login-modal>
+<activation-modal visible="{{showActivationModal}}" bindclose="onActivationClose" bindconfirm="onActivationConfirm"></activation-modal>

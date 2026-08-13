@@ -1,0 +1,6 @@
+<!--pages/qrcode/qrcode.wxml-->
+<view class="page-container">
+  <view class="qrcode-title">{{title}}</view>
+  <image class="qrcode-image" src="{{url}}" mode="widthFix" bindlongpress="onSaveImage" show-menu-by-longpress></image>
+  <view class="save-tip">长按图片保存到相册</view>
+</view>

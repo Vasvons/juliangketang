@@ -1,0 +1,142 @@
+/* pages/activation/activation.wxss */
+.page-container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 顶部深色区域 */
+.activation-header {
+  position: relative;
+  height: 417rpx;
+  overflow: hidden;
+}
+
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.avatar {
+  position: absolute;
+  top: 39rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 111rpx;
+  height: 111rpx;
+  border-radius: 50%;
+  background: #fff;
+  border: 4rpx solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.level-tag {
+  position: absolute;
+  top: 162rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8rpx 28rpx;
+  background: rgba(0, 0, 0, 0.38);
+  border-radius: 26rpx;
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 1.2;
+  z-index: 1;
+}
+
+/* VIP 卡片 */
+.vip-card {
+  position: relative;
+  margin: -151rpx 55rpx 24rpx;
+  height: 284rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vip-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.vip-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding-top: 10rpx;
+}
+
+.vip-level {
+  font-size: 42rpx;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 34rpx;
+  letter-spacing: 2rpx;
+}
+
+.activate-btn {
+  display: inline-block;
+  padding: 14rpx 76rpx;
+  background: #fff;
+  color: #333;
+  font-size: 28rpx;
+  border-radius: 44rpx;
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 信息卡片 */
+.info-card {
+  margin: 0 24rpx 20rpx;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #ff3333;
+  margin-bottom: 20rpx;
+}
+
+.rich-content {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.8;
+}
+
+.qrcode-tip {
+  font-size: 28rpx;
+  color: #ff3333;
+  text-align: center;
+  margin-bottom: 24rpx;
+  font-weight: 500;
+}
+
+.qrcode-image {
+  width: 420rpx;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12rpx;
+}
+
+.bottom-safe {
+  height: 40rpx;
+}

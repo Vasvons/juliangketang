@@ -1,0 +1,66 @@
+/* components/ad-card/ad-card.wxss */
+.ad-card {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.ad-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  margin-right: 20rpx;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.ad-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ad-title-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.ad-title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  margin-right: 12rpx;
+}
+
+.ad-badge {
+  font-size: 18rpx;
+  color: #ff6600;
+  border: 1rpx solid #ff6600;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+}
+
+.ad-desc {
+  font-size: 24rpx;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ad-btn {
+  padding: 10rpx 22rpx;
+  background: #ff6600;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}

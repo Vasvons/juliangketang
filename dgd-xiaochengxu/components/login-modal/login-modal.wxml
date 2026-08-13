@@ -1,0 +1,15 @@
+<!--components/login-modal/login-modal.wxml-->
+<view class="login-modal-mask" wx:if="{{visible}}" bindtap="onClose">
+  <view class="login-modal" catchtap="onNoop">
+    <view class="login-header">
+      <view class="login-title">授权登录</view>
+    </view>
+    <view class="login-body">
+      <view class="login-tip">授权登录后即可获取资源、激活卡密</view>
+      <view class="login-btns">
+        <view class="btn-cancel" bindtap="onCancel">继续浏览</view>
+        <button class="btn-confirm" bindtap="onLogin">授权登录</button>
+      </view>
+    </view>
+  </view>
+</view>

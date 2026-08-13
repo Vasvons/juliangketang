@@ -1,0 +1,75 @@
+/* components/login-modal/login-modal.wxss */
+.login-modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.login-modal {
+  width: 560rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.login-header {
+  background: linear-gradient(135deg, #ff8a9c, #ff4d6d);
+  padding: 48rpx 0;
+  text-align: center;
+}
+
+.login-title {
+  font-size: 40rpx;
+  color: #fff;
+  font-weight: 500;
+}
+
+.login-body {
+  padding: 40rpx 32rpx;
+}
+
+.login-tip {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.login-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancel,
+.btn-confirm {
+  width: 220rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  border-radius: 38rpx;
+  font-size: 28rpx;
+}
+
+.btn-cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #ff8a9c, #ff4d6d);
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.btn-confirm::after {
+  border: none;
+}

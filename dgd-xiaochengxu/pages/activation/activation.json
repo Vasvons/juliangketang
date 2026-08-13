@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "卡密激活",
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {
+    "login-modal": "/components/login-modal/login-modal",
+    "activation-modal": "/components/activation-modal/activation-modal"
+  }
+}

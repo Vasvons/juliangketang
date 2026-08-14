@@ -1,1 +1,0 @@
-import{r as t}from"./request-Br4VBOPE.js";const r=e=>t.get("/levels",{params:e}),n=e=>t.post("/levels",e),o=(e,s)=>t.put(`/levels/${e}`,s),u=e=>t.delete(`/levels/${e}`);export{n as c,u as d,r as g,o as u};

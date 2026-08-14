@@ -2,7 +2,7 @@
   <el-container class="layout-container">
     <el-aside :width="appStore.sidebarCollapsed ? '64px' : '220px'" class="sidebar">
       <div class="logo">
-        <span v-if="!appStore.sidebarCollapsed">JLXT Admin</span>
+        <span v-if="!appStore.sidebarCollapsed">JYLXT Admin</span>
         <el-icon v-else><Management /></el-icon>
       </div>
       <el-menu

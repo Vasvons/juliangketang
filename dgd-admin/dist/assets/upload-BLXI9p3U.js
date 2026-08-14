@@ -1,0 +1,1 @@
+import{a as t}from"./request-zRzf2Foy.js";import{a as e}from"./js.cookie-Bu25K3MY.js";const r="dgd_admin_token",n="/api/admin",m=o=>{const a=new FormData;return a.append("file",o),t.post(`${n}/upload`,a,{headers:{"Content-Type":"multipart/form-data",Authorization:`Bearer ${e.get(r)||""}`}})};export{m as u};

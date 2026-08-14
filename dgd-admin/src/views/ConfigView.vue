@@ -19,7 +19,7 @@
           class="avatar-uploader"
           :show-file-list="false"
           :http-request="(options) => handleUpload(options, 'activation_page_qrcode')"
-          accept="image/*"
+          accept="image/png,image/jpeg,image/gif,image/webp"
         >
           <el-image
             v-if="form.activation_page_qrcode"
@@ -35,7 +35,7 @@
           class="avatar-uploader"
           :show-file-list="false"
           :http-request="(options) => handleUpload(options, 'customer_service_qrcode')"
-          accept="image/*"
+          accept="image/png,image/jpeg,image/gif,image/webp"
         >
           <el-image
             v-if="form.customer_service_qrcode"
@@ -51,7 +51,7 @@
           class="avatar-uploader"
           :show-file-list="false"
           :http-request="(options) => handleUpload(options, 'about_us_qrcode')"
-          accept="image/*"
+          accept="image/png,image/jpeg,image/gif,image/webp"
         >
           <el-image
             v-if="form.about_us_qrcode"
@@ -183,6 +183,15 @@ onMounted(() => {
 
 .avatar-uploader:hover {
   border-color: var(--el-color-primary);
+}
+
+/* 触发区撑满整个上传框，点击框内任意位置都能打开文件选择 */
+.avatar-uploader :deep(.el-upload__trigger) {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-uploader-icon {

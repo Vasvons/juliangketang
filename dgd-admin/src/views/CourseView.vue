@@ -85,7 +85,7 @@
             class="avatar-uploader"
             :show-file-list="false"
             :http-request="handleUpload"
-            accept="image/*"
+            accept="image/png,image/jpeg,image/gif,image/webp"
           >
             <el-image
               v-if="form.cover"
@@ -104,7 +104,7 @@
             :http-request="handleUploadImage"
             :on-remove="handleRemoveImage"
             :on-preview="handlePreviewImage"
-            accept="image/*"
+            accept="image/png,image/jpeg,image/gif,image/webp"
             multiple
           >
             <el-icon class="avatar-uploader-icon"><Plus /></el-icon>
@@ -408,6 +408,15 @@ onMounted(() => {
 
 .avatar-uploader:hover {
   border-color: var(--el-color-primary);
+}
+
+/* 触发区撑满整个上传框，点击框内任意位置都能打开文件选择 */
+.avatar-uploader :deep(.el-upload__trigger) {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-uploader-icon {

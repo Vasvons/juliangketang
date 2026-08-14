@@ -1,5 +1,6 @@
 const pool = require('../config/database');
 const response = require('../utils/response');
+const { isDemoUser } = require('../utils/demo');
 
 const buildCourseItem = (course, minLevelId) => ({
   id: course.id,
@@ -53,16 +54,24 @@ exports.getCategoryCourses = async (req, res, next) => {
     const [[minLevel]] = await pool.query('SELECT id FROM levels ORDER BY sort_order ASC LIMIT 1');
     const minLevelId = minLevel ? minLevel.id : 1;
 
+    const demo = await isDemoUser(req.user && req.user.user_id);
+
     const [courses] = await pool.query(
       `SELECT c.id, c.title, c.cover, c.publish_date, c.level_required, cat.name AS category_name
        FROM courses c
        LEFT JOIN categories cat ON c.category_id = cat.id
        WHERE c.category_id = ? AND c.status = ?
-       ORDER BY c.sort_order ASC, c.created_at DESC`,
+       ORDER BY c.sort_order ASC, c.created_at DESC
+       ${demo ? 'LIMIT 8' : ''}`,
       [id, 'published']
     );
 
-    res.json(response.success(courses.map((course) => buildCourseItem(course, minLevelId))));
+    res.json(
+      response.success({
+        is_demo: demo,
+        courses: courses.map((course) => buildCourseItem(course, minLevelId)),
+      })
+    );
   } catch (err) {
     next(err);
   }

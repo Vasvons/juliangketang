@@ -27,6 +27,22 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
+// 可选用户认证：有 token 且有效时注入 req.user，无效或缺失时放行
+const optionalUser = (req, res, next) => {
+  const token = extractToken(req);
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, jwtConfig.secret);
+      if (decoded.user_id) {
+        req.user = decoded;
+      }
+    } catch (err) {
+      // 忽略无效 token，按未登录处理
+    }
+  }
+  next();
+};
+
 const authenticateAdmin = (req, res, next) => {
   const token = extractToken(req);
   if (!token) {
@@ -47,4 +63,5 @@ const authenticateAdmin = (req, res, next) => {
 module.exports = {
   authenticateUser,
   authenticateAdmin,
+  optionalUser,
 };

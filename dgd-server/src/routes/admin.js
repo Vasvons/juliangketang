@@ -18,6 +18,7 @@ router.post('/auth/login', adminController.login);
 router.get('/dashboard', authenticateAdmin, adminController.getDashboard);
 router.get('/users', authenticateAdmin, adminController.getUsers);
 router.put('/users/:id/level', authenticateAdmin, adminController.updateUserLevel);
+router.put('/users/:id/demo', authenticateAdmin, adminController.updateUserDemo);
 
 // Banner 管理
 router.get('/banners', authenticateAdmin, bannerController.getBanners);

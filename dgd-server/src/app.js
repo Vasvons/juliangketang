@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const routes = require('./routes');
 const errorHandler = require('./middleware/error');
+const pool = require('./config/database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,16 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+
+  // 幂等迁移：确保演示账号字段存在（已存在时忽略 ER_DUP_FIELDNAME 错误）
+  pool
+    .query("ALTER TABLE users ADD COLUMN is_demo TINYINT DEFAULT 0 COMMENT '是否演示账号'")
+    .then(() => console.log('migration: users.is_demo added'))
+    .catch((err) => {
+      if (err && err.code !== 'ER_DUP_FIELDNAME') {
+        console.error('migration is_demo failed:', err.message);
+      }
+    });
 });
 
 module.exports = app;

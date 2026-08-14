@@ -43,6 +43,14 @@
           </el-tag>
         </template>
       </el-table-column>
+      <el-table-column label="演示账号" width="100">
+        <template #default="{ row }">
+          <el-switch
+            :model-value="row.is_demo === 1"
+            @change="(val) => handleToggleDemo(row, val)"
+          />
+        </template>
+      </el-table-column>
       <el-table-column prop="created_at" label="注册时间" width="180" />
       <el-table-column label="操作" width="120" fixed="right">
         <template #default="{ row }">
@@ -81,7 +89,7 @@
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
-import { getUserList, updateUserLevel } from '@/api/user'
+import { getUserList, updateUserLevel, updateUserDemo } from '@/api/user'
 import { getLevelList } from '@/api/level'
 
 const userList = ref([])
@@ -132,6 +140,19 @@ const handleEditLevel = (row) => {
   currentUser.value = row
   form.level_id = row.level_id || 1
   dialogVisible.value = true
+}
+
+const handleToggleDemo = async (row, val) => {
+  const next = val ? 1 : 0
+  const prev = row.is_demo
+  row.is_demo = next
+  try {
+    await updateUserDemo(row.id, { is_demo: next })
+    ElMessage.success(next === 1 ? '已设为演示账号' : '已取消演示账号')
+  } catch (error) {
+    row.is_demo = prev
+    ElMessage.error('设置失败')
+  }
 }
 
 const handleSubmit = async () => {

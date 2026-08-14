@@ -1,5 +1,6 @@
 const pool = require('../config/database');
 const response = require('../utils/response');
+const { isDemoUser } = require('../utils/demo');
 
 const buildRecentCourse = (course, minLevelId) => ({
   id: course.id,
@@ -30,21 +31,42 @@ exports.getHome = async (req, res, next) => {
     const [[minLevel]] = await pool.query('SELECT id FROM levels ORDER BY sort_order ASC LIMIT 1');
     const minLevelId = minLevel ? minLevel.id : 1;
 
-    const [recentCourses] = await pool.query(
-      `SELECT c.id, c.title, c.cover, c.publish_date, c.level_required, cat.name AS category_name
-       FROM courses c
-       LEFT JOIN categories cat ON c.category_id = cat.id
-       WHERE c.status = ?
-       ORDER BY c.created_at DESC
-       LIMIT 20`,
-      ['published']
-    );
+    const demo = await isDemoUser(req.user && req.user.user_id);
+
+    let recentCourses;
+    if (demo) {
+      // 演示账号：每个分类最新 8 个课程，按分类顺序依次拼接（9 分类 × 8 = 72 个）
+      recentCourses = [];
+      for (const cat of categories) {
+        const [rows] = await pool.query(
+          `SELECT c.id, c.title, c.cover, c.publish_date, c.level_required, cat.name AS category_name
+           FROM courses c
+           LEFT JOIN categories cat ON c.category_id = cat.id
+           WHERE c.category_id = ? AND c.status = ?
+           ORDER BY c.created_at DESC
+           LIMIT 8`,
+          [cat.id, 'published']
+        );
+        recentCourses = recentCourses.concat(rows);
+      }
+    } else {
+      [recentCourses] = await pool.query(
+        `SELECT c.id, c.title, c.cover, c.publish_date, c.level_required, cat.name AS category_name
+         FROM courses c
+         LEFT JOIN categories cat ON c.category_id = cat.id
+         WHERE c.status = ?
+         ORDER BY c.created_at DESC
+         LIMIT 20`,
+        ['published']
+      );
+    }
 
     res.json(
       response.success({
         banners,
         notices,
         categories,
+        is_demo: demo,
         recentCourses: recentCourses.map((course) => buildRecentCourse(course, minLevelId)),
       })
     );

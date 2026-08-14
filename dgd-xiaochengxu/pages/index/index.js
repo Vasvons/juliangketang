@@ -8,10 +8,14 @@ Page({
     categories: [],
     recentCourses: [],
     displayList: [],
+    isDemo: false,
     welcomeVisible: false,
     welcomeTitle: '',
     welcomeContent: ''
   },
+
+  // 已追加的课程总数（跨循环累计，用于广告间隔计算）
+  courseCount: 0,
 
   onLoad() {
     this.loadHomeData();
@@ -50,12 +54,14 @@ Page({
       .then((res) => {
         wx.hideLoading();
         const data = res.data || res;
+        this.courseCount = 0;
         const list = this.buildDisplayList(data.recentCourses || []);
         this.setData({
           banners: data.banners || [],
           notices: data.notices || [],
           categories: data.categories || [],
           recentCourses: data.recentCourses || [],
+          isDemo: !!data.is_demo,
           displayList: list
         });
       })
@@ -66,13 +72,23 @@ Page({
 
   buildDisplayList(courses) {
     const list = [];
-    courses.forEach((course, index) => {
+    courses.forEach((course) => {
       list.push({ type: 'course', data: course });
-      if ((index + 1) % 8 === 0) {
+      this.courseCount += 1;
+      if (this.courseCount % 8 === 0) {
         list.push({ type: 'ad' });
       }
     });
     return list;
+  },
+
+  // 演示账号：触底后循环追加课程，广告按全局每 8 个课程间隔持续插入
+  onReachBottom() {
+    if (!this.data.isDemo || !this.data.recentCourses.length) return;
+    const appendList = this.buildDisplayList(this.data.recentCourses);
+    this.setData({
+      displayList: this.data.displayList.concat(appendList)
+    });
   },
 
   onMore() {

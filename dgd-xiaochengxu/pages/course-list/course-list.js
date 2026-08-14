@@ -6,8 +6,12 @@ Page({
     categoryId: '',
     categoryName: '',
     courses: [],
-    displayList: []
+    displayList: [],
+    isDemo: false
   },
+
+  // 已追加的课程总数（跨循环累计，用于广告间隔计算）
+  courseCount: 0,
 
   onLoad(options) {
     const { id, name } = options || {};
@@ -38,9 +42,12 @@ Page({
       .then((res) => {
         wx.hideLoading();
         const data = res.data || res;
-        const list = this.buildDisplayList(data || []);
+        const courses = (data && data.courses) || data || [];
+        this.courseCount = 0;
+        const list = this.buildDisplayList(courses);
         this.setData({
-          courses: data || [],
+          courses: courses,
+          isDemo: !!(data && data.is_demo),
           displayList: list
         });
       })
@@ -51,12 +58,22 @@ Page({
 
   buildDisplayList(courses) {
     const list = [];
-    courses.forEach((course, index) => {
+    courses.forEach((course) => {
       list.push({ type: 'course', data: course });
-      if ((index + 1) % 8 === 0) {
+      this.courseCount += 1;
+      if (this.courseCount % 8 === 0) {
         list.push({ type: 'ad' });
       }
     });
     return list;
+  },
+
+  // 演示账号：触底后循环追加课程，广告按全局每 8 个课程间隔持续插入
+  onReachBottom() {
+    if (!this.data.isDemo || !this.data.courses.length) return;
+    const appendList = this.buildDisplayList(this.data.courses);
+    this.setData({
+      displayList: this.data.displayList.concat(appendList)
+    });
   }
 });

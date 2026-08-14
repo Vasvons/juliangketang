@@ -78,7 +78,7 @@ exports.getDashboard = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   try {
     const [users] = await pool.query(
-      `SELECT u.id, u.openid, u.nickname, u.avatar, u.level_id, u.status, u.created_at, l.name AS level_name
+      `SELECT u.id, u.openid, u.nickname, u.avatar, u.level_id, u.status, u.is_demo, u.created_at, l.name AS level_name
        FROM users u
        LEFT JOIN levels l ON u.level_id = l.id
        ORDER BY u.created_at DESC`
@@ -113,7 +113,22 @@ exports.updateUserLevel = async (req, res, next) => {
   }
 };
 
-exports.getCodes = async (req, res, next) => {
+exports.updateUserDemo = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { is_demo } = req.body;
+    const value = is_demo === true || is_demo === 1 ? 1 : 0;
+    const [result] = await pool.query('UPDATE users SET is_demo = ? WHERE id = ?', [value, id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json(response.error(404, '用户不存在'));
+    }
+    res.json(response.success({ id: Number(id), is_demo: value }));
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getActivationCodes = async (req, res, next) => {
   try {
     const [codes] = await pool.query(
       `SELECT ac.*, l.name AS level_name, u.nickname AS used_by_nickname

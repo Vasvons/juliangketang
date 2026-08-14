@@ -1,6 +1,18 @@
 const pool = require('../../config/database');
 const response = require('../../utils/response');
 
+// images 字段（TEXT 存 JSON 数组）解析为前端可用的数组
+function parseImages(images) {
+  if (!images) return [];
+  if (Array.isArray(images)) return images;
+  try {
+    const arr = JSON.parse(images);
+    return Array.isArray(arr) ? arr : [];
+  } catch (err) {
+    return [];
+  }
+}
+
 exports.getCourses = async (req, res, next) => {
   try {
     const { category_id } = req.query;
@@ -15,7 +27,7 @@ exports.getCourses = async (req, res, next) => {
     }
     sql += ' ORDER BY c.sort_order ASC, c.id DESC';
     const [courses] = await pool.query(sql, params);
-    res.json(response.success(courses));
+    res.json(response.success(courses.map((c) => ({ ...c, images: parseImages(c.images) }))));
   } catch (err) {
     next(err);
   }
@@ -26,6 +38,7 @@ exports.createCourse = async (req, res, next) => {
     const {
       title,
       cover,
+      images,
       category_id,
       description,
       catalog,
@@ -39,11 +52,12 @@ exports.createCourse = async (req, res, next) => {
     }
     const [result] = await pool.query(
       `INSERT INTO courses
-       (title, cover, category_id, description, catalog, netdisk_resource, publish_date, status, level_required, sort_order)
-       VALUES (?, ?, ?, ?, ?, ?, CURDATE(), ?, ?, ?)`,
+       (title, cover, images, category_id, description, catalog, netdisk_resource, publish_date, status, level_required, sort_order)
+       VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE(), ?, ?, ?)`,
       [
         title,
         cover || '',
+        JSON.stringify(Array.isArray(images) ? images : []),
         category_id || null,
         description || '',
         catalog || '',
@@ -65,6 +79,7 @@ exports.updateCourse = async (req, res, next) => {
     const {
       title,
       cover,
+      images,
       category_id,
       description,
       catalog,
@@ -78,13 +93,14 @@ exports.updateCourse = async (req, res, next) => {
     }
     const [result] = await pool.query(
       `UPDATE courses SET
-        title = ?, cover = ?, category_id = ?, description = ?, catalog = ?,
+        title = ?, cover = ?, images = ?, category_id = ?, description = ?, catalog = ?,
         netdisk_resource = ?, status = ?,
         level_required = ?, sort_order = ?
        WHERE id = ?`,
       [
         title,
         cover || '',
+        JSON.stringify(Array.isArray(images) ? images : []),
         category_id || null,
         description || '',
         catalog || '',

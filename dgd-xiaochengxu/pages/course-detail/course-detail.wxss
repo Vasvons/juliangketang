@@ -66,6 +66,23 @@
   line-height: 1.8;
 }
 
+.course-images {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-image-item {
+  width: 100%;
+  display: block;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+  background: #f0f0f0;
+}
+
+.course-image-item:last-child {
+  margin-bottom: 0;
+}
+
 .chapter-list {
   padding-left: 12rpx;
 }

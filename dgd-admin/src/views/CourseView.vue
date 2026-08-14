@@ -95,6 +95,21 @@
             />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </el-upload>
+          <div class="form-tip">列表和封面展示用，建议 3:4 竖图</div>
+        </el-form-item>
+        <el-form-item label="课程图片">
+          <el-upload
+            list-type="picture-card"
+            :file-list="imageList"
+            :http-request="handleUploadImage"
+            :on-remove="handleRemoveImage"
+            :on-preview="handlePreviewImage"
+            accept="image/*"
+            multiple
+          >
+            <el-icon class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
+          <div class="form-tip">课程详情页展示的介绍图片，可上传多张，拖动文件可批量上传</div>
         </el-form-item>
         <el-form-item label="项目介绍">
           <el-input
@@ -176,6 +191,7 @@ const filterCategory = ref('')
 const form = reactive({
   title: '',
   cover: '',
+  images: [],
   category_id: '',
   description: '',
   catalog: '',
@@ -185,9 +201,13 @@ const form = reactive({
   status: 'published'
 })
 
+// 课程图片列表（el-upload file-list 格式：{ name, url }）
+const imageList = ref([])
+
 const resetForm = () => {
   form.title = ''
   form.cover = ''
+  form.images = []
   form.category_id = ''
   form.description = ''
   form.catalog = ''
@@ -195,6 +215,7 @@ const resetForm = () => {
   form.level_required = ''
   form.sort_order = 0
   form.status = 'published'
+  imageList.value = []
 }
 
 const fetchList = async () => {
@@ -259,6 +280,9 @@ const handleEdit = (row) => {
   form.level_required = row.level_required || ''
   form.sort_order = row.sort_order
   form.status = row.status
+  const imgs = Array.isArray(row.images) ? row.images : []
+  form.images = [...imgs]
+  imageList.value = imgs.map((url) => ({ name: url.split('/').pop(), url }))
   dialogVisible.value = true
 }
 
@@ -272,11 +296,34 @@ const handleUpload = async ({ file }) => {
   }
 }
 
+// 课程图片：上传成功后追加
+const handleUploadImage = async ({ file }) => {
+  try {
+    const res = await uploadImage(file)
+    imageList.value.push({ name: file.name, url: res.data.data.url })
+    ElMessage.success('图片上传成功')
+  } catch (error) {
+    ElMessage.error('图片上传失败')
+  }
+}
+
+// 课程图片：删除
+const handleRemoveImage = (file) => {
+  imageList.value = imageList.value.filter((f) => f.url !== file.url)
+}
+
+// 课程图片：预览
+const handlePreviewImage = (file) => {
+  window.open(file.url, '_blank')
+}
+
 const handleSubmit = async () => {
   if (!form.title) {
     ElMessage.warning('请输入课程标题')
     return
   }
+  // 提交前同步课程图片列表
+  form.images = imageList.value.map((f) => f.url)
   submitting.value = true
   try {
     if (isEdit.value) {
@@ -371,5 +418,12 @@ onMounted(() => {
 .upload-preview {
   width: 200px;
   height: 120px;
+}
+
+.form-tip {
+  font-size: 12px;
+  color: #909399;
+  line-height: 1.4;
+  margin-top: 4px;
 }
 </style>

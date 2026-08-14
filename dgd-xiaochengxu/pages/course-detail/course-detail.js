@@ -44,6 +44,8 @@ Page({
         const data = res.data || res;
         const chapters = this.parseChapters(data.catalog);
         data.publish_date = this.formatDate(data.publish_date);
+        // 课程图片规范为数组（后端返回 JSON 数组，容错处理）
+        data.images = Array.isArray(data.images) ? data.images : [];
         this.setData({
           course: data,
           chapters
@@ -53,6 +55,17 @@ Page({
       .catch(() => {
         wx.hideLoading();
       });
+  },
+
+  // 点击课程图片放大预览
+  onPreviewImage(e) {
+    const { index } = e.currentTarget.dataset;
+    const urls = this.data.course.images || [];
+    if (!urls.length) return;
+    wx.previewImage({
+      current: urls[index],
+      urls
+    });
   },
 
   formatDate(date) {

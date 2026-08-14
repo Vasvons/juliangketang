@@ -36,6 +36,16 @@ app.listen(PORT, () => {
         console.error('migration is_demo failed:', err.message);
       }
     });
+
+  // 幂等迁移：课程多图字段（TEXT 存 JSON 数组）
+  pool
+    .query("ALTER TABLE courses ADD COLUMN images TEXT COMMENT '课程图片 JSON 数组' AFTER cover")
+    .then(() => console.log('migration: courses.images added'))
+    .catch((err) => {
+      if (err && err.code !== 'ER_DUP_FIELDNAME') {
+        console.error('migration courses.images failed:', err.message);
+      }
+    });
 });
 
 module.exports = app;

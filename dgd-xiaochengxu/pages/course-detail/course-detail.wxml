@@ -12,6 +12,21 @@
 
   <image class="course-cover" src="{{course.cover || '/images/placeholder.png'}}" mode="widthFix"></image>
 
+  <view class="section-block" wx:if="{{course.images.length > 0}}">
+    <view class="section-title">课程图片</view>
+    <view class="course-images">
+      <image
+        class="course-image-item"
+        wx:for="{{course.images}}"
+        wx:key="index"
+        src="{{item}}"
+        mode="widthFix"
+        data-index="{{index}}"
+        bindtap="onPreviewImage"
+      ></image>
+    </view>
+  </view>
+
   <view class="section-block">
     <view class="section-title">项目介绍</view>
     <rich-text class="rich-content" nodes="{{course.description}}"></rich-text>

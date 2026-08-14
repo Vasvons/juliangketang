@@ -1,6 +1,17 @@
 const pool = require('../config/database');
 const response = require('../utils/response');
 
+// images 字段（TEXT 存 JSON 数组）解析为数组
+function parseImages(images) {
+  if (!images) return [];
+  try {
+    const arr = JSON.parse(images);
+    return Array.isArray(arr) ? arr : [];
+  } catch (err) {
+    return [];
+  }
+}
+
 exports.getCourses = async (req, res, next) => {
   try {
     const [courses] = await pool.query(
@@ -21,7 +32,7 @@ exports.getCourseById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [courses] = await pool.query(
-      `SELECT c.id, c.title, c.cover, c.description, c.catalog, DATE_FORMAT(c.publish_date, '%Y-%c-%e') AS publish_date,
+      `SELECT c.id, c.title, c.cover, c.images, c.description, c.catalog, DATE_FORMAT(c.publish_date, '%Y-%c-%e') AS publish_date,
               c.category_id, cat.name AS category_name, c.level_required, l.name AS level_name
        FROM courses c
        LEFT JOIN categories cat ON c.category_id = cat.id
@@ -34,7 +45,7 @@ exports.getCourseById = async (req, res, next) => {
       return res.status(404).json(response.error(404, '课程不存在'));
     }
 
-    res.json(response.success(courses[0]));
+    res.json(response.success({ ...courses[0], images: parseImages(courses[0].images) }));
   } catch (err) {
     next(err);
   }

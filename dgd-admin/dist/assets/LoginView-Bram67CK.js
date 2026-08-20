@@ -1,9 +1,0 @@
-import{i as g,_ as V,o as b,c as v,a as t,w as a,r as n,b as h,d as y,e as k,f as x,g as B}from"./index-DL-Vwp-Y.js";import{E as p}from"./js.cookie-CNxnIpkP.js";import{u as L}from"./user-DvdZhyRP.js";import{r as S}from"./request-CzfgU93w.js";/*!
- * vue-router v4.6.4
- * (c) 2025 Eduardo San Martin Morote
- * @license MIT
- */const U=Symbol("");/*!
- * vue-router v4.6.4
- * (c) 2025 Eduardo San Martin Morote
- * @license MIT
- */function C(){return g(U)}const E=i=>S.post("/auth/login",i),N={class:"login-page"},I={__name:"LoginView",setup(i){C();const u=L(),e=x({username:"",password:""}),l=B(!1),m=async()=>{if(!e.username||!e.password){p.warning("请输入用户名和密码");return}l.value=!0;try{const s=await E(e);u.setToken(s.data.token),u.setUserInfo(s.data.admin),p.success("登录成功"),window.location.href="/admin/dashboard"}catch(s){console.error(s)}finally{l.value=!1}};return(s,o)=>{const c=n("el-input"),r=n("el-form-item"),f=n("el-button"),_=n("el-form"),w=n("el-card");return b(),v("div",N,[t(w,{class:"login-card",shadow:"hover"},{header:a(()=>[...o[2]||(o[2]=[k("h2",{class:"login-title"},"JLBB 管理后台",-1)])]),default:a(()=>[t(_,{model:e,"label-position":"top",onSubmit:h(m,["prevent"])},{default:a(()=>[t(r,{label:"用户名"},{default:a(()=>[t(c,{modelValue:e.username,"onUpdate:modelValue":o[0]||(o[0]=d=>e.username=d),placeholder:"请输入用户名"},null,8,["modelValue"])]),_:1}),t(r,{label:"密码"},{default:a(()=>[t(c,{modelValue:e.password,"onUpdate:modelValue":o[1]||(o[1]=d=>e.password=d),type:"password",placeholder:"请输入密码","show-password":""},null,8,["modelValue"])]),_:1}),t(r,null,{default:a(()=>[t(f,{type:"primary",loading:l.value,onClick:m,class:"login-btn"},{default:a(()=>[...o[3]||(o[3]=[y(" 登录 ",-1)])]),_:1},8,["loading"])]),_:1})]),_:1},8,["model"])]),_:1})])}}},J=V(I,[["__scopeId","data-v-a081f251"]]);export{J as default};

@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <h2>后台首页</h2>
-    <p class="welcome-text">欢迎使用 JLBB 管理后台</p>
+    <p class="welcome-text">欢迎使用 JLDJT 管理后台</p>
     <el-row :gutter="20" class="stats-row">
       <el-col :xs="24" :sm="12" :md="8" :lg="8" :xl="8">
         <el-card class="stat-card" shadow="hover">
